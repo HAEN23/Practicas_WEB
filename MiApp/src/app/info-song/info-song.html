@@ -1,0 +1,19 @@
+<div id="main-media">
+  <!-- Próximas canciones -->
+  <div class="current-playlist">
+    <h3>Próximas canciones</h3>
+    <div class="playlist-items">
+      @for (song of availableSongs(); track song.song_name; let i = $index) {
+        <div class="playlist-item" 
+             (click)="selectSong(song)"
+             [class.current]="currentSong()?.song_name === song.song_name">
+          <img [src]="song.caratula" [alt]="song.song_name" class="song-thumbnail">
+          <div class="song-info">
+            <h4>{{ song.song_name }}</h4>
+            <p>{{ song.artist_name }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

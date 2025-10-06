@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundShock - Music Player</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script type="module" src="./main.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1 class="app-title">SoundShock</h1>
+        </header>
+        
+        <div class="main-content">
+            <div class="current-player">
+                <div class="album-art">
+                    <img src="./media/default_img.jpg" alt="Album Art" id="song-img">  
+                </div>
+                
+                <div class="song-info">
+                    <h2 id="title">Canción Actual</h2>
+                    <p id="artist">Artista</p>
+                </div>
+                
+                <div class="audio-controls">
+                    <audio controls id="media" hidden>
+                       
+                    </audio>
+                    <input type="range" value="0" id="progress" class="progress-bar">
+                </div>
+
+                <div class="player-controls">
+                    <button id="lastest" class="control-btn prev-btn">
+                        <span>⏮</span>
+                    </button>
+                    <button id="play" class="control-btn play-btn">
+                        <span>▶</span>
+                    </button>
+                    <button id="forward" class="control-btn next-btn">
+                        <span>⏭</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="playlist-section">
+                <h3 class="playlist-title">Próximas canciones</h3>
+                <div class="playlist">
+                    <div class="playlist-item">
+                        <span class="song-name">Canción 1</span>
+                    </div>
+                    <div class="playlist-item">
+                        <span class="song-name">Canción 2</span>
+                    </div>
+                    <div class="playlist-item">
+                        <span class="song-name">Canción 3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
