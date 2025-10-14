@@ -1,6 +1,39 @@
 <div class="music-app">
   <header class="app-header">
     <h1>{{ title }}</h1>
+    <!-- Botones de Spotify -->
+    <div style="display: flex; gap: 10px; margin-left: 20px; flex-wrap: wrap;">
+      <button 
+        (click)="testSpotifyLogin()" 
+        style="padding: 10px 20px; background: #1DB954; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        🎶 Login Spotify
+      </button>
+      <button 
+        (click)="useSpotifyCode()" 
+        style="padding: 10px 20px; background: #FF6B35; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        🎫 Usar Código
+      </button>
+      <button 
+        (click)="reloadSpotifyPlaylist()" 
+        style="padding: 10px 20px; background: #1ED760; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        🔄 Cargar Playlist
+      </button>
+      <button 
+        (click)="testNextSong()" 
+        style="padding: 10px 20px; background: #9146FF; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        ⏭️ Test Next
+      </button>
+      <button 
+        (click)="testPreviousSong()" 
+        style="padding: 10px 20px; background: #9146FF; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        ⏮️ Test Prev
+      </button>
+      <button 
+        (click)="showCurrentPlaylist()" 
+        style="padding: 10px 20px; background: #333; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        📋 Ver Playlist
+      </button>
+    </div>
   </header>
 
   <main class="app-main">
