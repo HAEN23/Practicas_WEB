@@ -1,0 +1,86 @@
+<div class="search-results-container">
+    <div class="search-header" *ngIf="searchQuery">
+        <h1 class="search-title">Resultados para "{{ searchQuery }}"</h1>
+    </div>
+    
+    <div class="loading-container" *ngIf="isLoading">
+        <div class="loading-spinner">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <p>Buscando música...</p>
+        </div>
+    </div>
+
+    <div *ngIf="searchResults && !isLoading">
+        
+        <!-- Sección de Tracks (Canciones) -->
+        <section class="results-section" *ngIf="searchResults.tracks?.items?.length > 0">
+            <h2 class="section-title">
+                <i class="fa-solid fa-music"></i>
+                Canciones
+            </h2>
+            <div class="cards-grid">
+                <div class="card" *ngFor="let track of searchResults.tracks.items">
+                    <img [src]="track.album?.images?.[0]?.url || 'assets/default-song.png'" 
+                         [alt]="track.name" 
+                         class="card-image">
+                    <div class="card-info">
+                        <h3 class="card-title">{{ track.name }}</h3>
+                        <p class="card-subtitle">{{ track.artists?.[0]?.name }}</p>
+                    </div>
+                    <button class="play-button" title="Reproducir">
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Albums -->
+        <section class="results-section" *ngIf="searchResults.albums?.items?.length > 0">
+            <h2 class="section-title">
+                <i class="fa-solid fa-compact-disc"></i>
+                Álbumes
+            </h2>
+            <div class="cards-grid">
+                <div class="card" *ngFor="let album of searchResults.albums.items">
+                    <img [src]="album.images?.[0]?.url || 'assets/default-album.png'" 
+                         [alt]="album.name" 
+                         class="card-image">
+                    <div class="card-info">
+                        <h3 class="card-title">{{ album.name }}</h3>
+                        <p class="card-subtitle">{{ album.artists?.[0]?.name }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Artists -->
+        <section class="results-section" *ngIf="searchResults.artists?.items?.length > 0">
+            <h2 class="section-title">
+                <i class="fa-solid fa-microphone"></i>
+                Artistas
+            </h2>
+            <div class="cards-grid">
+                <div class="card" *ngFor="let artist of searchResults.artists.items">
+                    <img [src]="artist.images?.[0]?.url || 'assets/default-artist.png'" 
+                         [alt]="artist.name" 
+                         class="card-image artist-image">
+                    <div class="card-info">
+                        <h3 class="card-title">{{ artist.name }}</h3>
+                        <p class="card-subtitle">{{ artist.followers?.total || 0 }} seguidores</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mensaje cuando no hay resultados -->
+        <div class="no-results" *ngIf="!searchResults.tracks?.items?.length && 
+                                      !searchResults.albums?.items?.length && 
+                                      !searchResults.artists?.items?.length">
+            <div class="no-results-content">
+                <i class="fa-solid fa-search"></i>
+                <h3>No se encontraron resultados</h3>
+                <p>Intenta con otros términos de búsqueda</p>
+            </div>
+        </div>
+    </div>
+</div>

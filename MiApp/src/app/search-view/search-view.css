@@ -1,0 +1,396 @@
+/* ==============================================
+   VISTA DE BÚSQUEDA ESTILO SPOTIFY
+   ============================================== */
+
+.search-view-container {
+  width: 100%;
+  min-height: calc(100vh - 200px);
+  background: rgba(15, 15, 15, 0.6);
+  border-radius: 20px;
+  animation: slideInSearch 0.4s ease-out;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(29, 185, 84, 0.2);
+}
+
+/* ==============================================
+   HEADER DE BÚSQUEDA
+   ============================================== */
+
+.search-header {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(29, 185, 84, 0.2);
+  padding: 20px;
+  border-radius: 20px 20px 0 0;
+}
+
+.search-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.back-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  padding: 12px 20px;
+  color: #b3b3b3;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+
+.back-btn:hover {
+  background: rgba(29, 185, 84, 0.2);
+  border-color: rgba(29, 185, 84, 0.5);
+  color: #1db954;
+  transform: translateX(-3px);
+}
+
+.search-info h2 {
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 5px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-info h2 i {
+  color: #1db954;
+  font-size: 1.8rem;
+}
+
+.search-info p {
+  color: #b3b3b3;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.clear-all-btn {
+  background: rgba(231, 76, 60, 0.2);
+  border: 2px solid rgba(231, 76, 60, 0.4);
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  color: #e74c3c;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clear-all-btn:hover {
+  background: rgba(231, 76, 60, 0.4);
+  border-color: rgba(231, 76, 60, 0.6);
+  transform: scale(1.05);
+}
+
+/* ==============================================
+   CONTENEDOR DE RESULTADOS
+   ============================================== */
+
+.search-results-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - 120px);
+}
+
+.no-results {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+}
+
+.no-results-content {
+  text-align: center;
+  color: #b3b3b3;
+}
+
+.no-results-content i {
+  font-size: 4rem;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.no-results-content h3 {
+  font-size: 1.5rem;
+  margin: 0 0 10px 0;
+  color: #ffffff;
+}
+
+.no-results-content p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* ==============================================
+   TABLA DE RESULTADOS ESTILO SPOTIFY
+   ============================================== */
+
+.results-list {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.results-table-header {
+  display: grid;
+  grid-template-columns: 50px 1fr 200px 100px 120px;
+  gap: 15px;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #b3b3b3;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.result-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 200px 100px 120px;
+  gap: 15px;
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  align-items: center;
+}
+
+.result-row:hover {
+  background: rgba(29, 185, 84, 0.1);
+}
+
+.result-row:hover .play-btn-small {
+  display: flex !important;
+}
+
+.result-row:hover .track-number {
+  display: none;
+}
+
+.result-row.playing {
+  background: rgba(29, 185, 84, 0.15);
+  border-left: 3px solid #1db954;
+}
+
+/* Columnas individuales */
+.result-index {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.track-number {
+  color: #b3b3b3;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.play-btn-small, .playing-indicator {
+  background: transparent;
+  border: none;
+  color: #1db954;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.play-btn-small:hover {
+  background: rgba(29, 185, 84, 0.2);
+  transform: scale(1.1);
+}
+
+.playing-indicator {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.result-track-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.track-image img {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.track-details {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.track-name {
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-artist {
+  color: #b3b3b3;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.result-album span {
+  color: #b3b3b3;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.result-duration span {
+  color: #b3b3b3;
+  font-size: 0.9rem;
+}
+
+.result-actions {
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.result-row:hover .result-actions {
+  opacity: 1;
+}
+
+.action-btn {
+  background: transparent;
+  border: none;
+  color: #b3b3b3;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.action-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.like-btn:hover {
+  color: #e74c3c;
+}
+
+.add-btn:hover {
+  color: #1db954;
+}
+
+/* ==============================================
+   ANIMACIONES
+   ============================================== */
+
+@keyframes slideInSearch {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* ==============================================
+   RESPONSIVE DESIGN
+   ============================================== */
+
+@media (max-width: 768px) {
+  .search-header-content {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .back-btn span {
+    display: none;
+  }
+  
+  .results-table-header,
+  .result-row {
+    grid-template-columns: 40px 1fr 80px;
+    gap: 10px;
+  }
+  
+  .result-album,
+  .result-duration {
+    display: none;
+  }
+  
+  .header-album,
+  .header-duration {
+    display: none;
+  }
+  
+  .result-actions {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-results-container {
+    padding: 10px;
+  }
+  
+  .results-table-header {
+    display: none;
+  }
+  
+  .result-row {
+    grid-template-columns: 40px 1fr 60px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    margin-bottom: 5px;
+    border: none;
+  }
+}

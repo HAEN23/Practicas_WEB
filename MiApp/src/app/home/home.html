@@ -1,0 +1,117 @@
+<div class="home-container">
+  <!-- Saludo personalizado -->
+  <section class="welcome-section">
+    <div class="welcome-content">
+      <h2 class="greeting">
+        <i class="fa-solid fa-compact-disc"></i>
+        Álbumes destacados
+      </h2>
+      <p class="subtitle">Descubre nuevos álbumes y artistas</p>
+    </div>
+  </section>
+
+  <!-- Loading State -->
+  <div class="loading-container" *ngIf="isLoading">
+    <div class="loading-spinner">
+      <i class="fa-solid fa-spinner fa-spin"></i>
+    </div>
+    <p>Cargando álbumes...</p>
+  </div>
+
+  <!-- Álbumes destacados -->
+  <section class="albums-section" *ngIf="!isLoading && featuredAlbums.length > 0">
+    <h3 class="section-title">
+      <i class="fa-solid fa-star"></i>
+      Álbumes destacados
+    </h3>
+    <div class="albums-grid">
+      <div 
+        class="album-card" 
+        *ngFor="let album of featuredAlbums"
+        (click)="playAlbum(album)">
+        <div class="album-image">
+          <img [src]="album.image" [alt]="album.name" />
+          <div class="play-overlay">
+            <button class="play-btn-large">
+              <i class="fa-solid fa-play"></i>
+            </button>
+          </div>
+        </div>
+        <div class="album-info">
+          <h4 class="album-title">{{ album.name }}</h4>
+          <p class="album-artist">{{ album.artist }}</p>
+          <span class="album-tracks">{{ album.totalTracks }} canciones</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nuevos lanzamientos -->
+  <section class="albums-section" *ngIf="!isLoading && newReleases.length > 0">
+    <h3 class="section-title">
+      <i class="fa-solid fa-sparkles"></i>
+      Nuevos lanzamientos
+    </h3>
+    <div class="albums-grid">
+      <div 
+        class="album-card" 
+        *ngFor="let album of newReleases"
+        (click)="playAlbum(album)">
+        <div class="album-image">
+          <img [src]="album.image" [alt]="album.name" />
+          <div class="play-overlay">
+            <button class="play-btn-large">
+              <i class="fa-solid fa-play"></i>
+            </button>
+          </div>
+        </div>
+        <div class="album-info">
+          <h4 class="album-title">{{ album.name }}</h4>
+          <p class="album-artist">{{ album.artist }}</p>
+          <span class="album-year">{{ album.releaseDate }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Álbumes populares -->
+  <section class="albums-section" *ngIf="!isLoading && popularAlbums.length > 0">
+    <h3 class="section-title">
+      <i class="fa-solid fa-fire"></i>
+      Álbumes populares
+    </h3>
+    <div class="albums-grid">
+      <div 
+        class="album-card" 
+        *ngFor="let album of popularAlbums"
+        (click)="playAlbum(album)">
+        <div class="album-image">
+          <img [src]="album.image" [alt]="album.name" />
+          <div class="play-overlay">
+            <button class="play-btn-large">
+              <i class="fa-solid fa-play"></i>
+            </button>
+          </div>
+        </div>
+        <div class="album-info">
+          <h4 class="album-title">{{ album.name }}</h4>
+          <p class="album-artist">{{ album.artist }}</p>
+          <span class="album-tracks">{{ album.totalTracks }} tracks</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Estado vacío -->
+  <div class="empty-state" *ngIf="!isLoading && featuredAlbums.length === 0">
+    <div class="empty-icon">
+      <i class="fa-solid fa-compact-disc"></i>
+    </div>
+    <h3>No se pudieron cargar los álbumes</h3>
+    <p>Intenta recargar la página o verifica tu conexión a internet</p>
+    <button class="retry-btn" (click)="loadAlbums()">
+      <i class="fa-solid fa-refresh"></i>
+      Reintentar
+    </button>
+  </div>
+</div>

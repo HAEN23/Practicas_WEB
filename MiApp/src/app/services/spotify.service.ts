@@ -120,6 +120,50 @@ export class SpotifyService {
     return await this.getAccessToken();
   }
 
-  async searchTracks(query: string) { /* ... */ }
-  async getUserPlaylists() { /* ... */ }
+  async searchTracks(query: string): Promise<any> {
+    try {
+      const token = await this.getValidAccessToken();
+      
+      const response = await fetch(
+        `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=20`,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        }
+      );
+      
+      if (!response.ok) {
+        throw new Error(`Error ${response.status}: ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      return data.tracks?.items || [];
+    } catch (error) {
+      console.error('❌ Error buscando tracks:', error);
+      throw error;
+    }
+  }
+
+  async getUserPlaylists(): Promise<any> {
+    try {
+      const token = await this.getValidAccessToken();
+      
+      const response = await fetch('https://api.spotify.com/v1/me/playlists', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Error ${response.status}: ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      return data.items || [];
+    } catch (error) {
+      console.error('❌ Error obteniendo playlists:', error);
+      throw error;
+    }
+  }
 }

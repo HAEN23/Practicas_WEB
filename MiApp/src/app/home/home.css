@@ -1,0 +1,336 @@
+/* ==============================================
+   HOME COMPONENT - ESTILO SPOTIFY
+   ============================================== */
+
+.home-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* ==============================================
+   SECCIÓN DE BIENVENIDA
+   ============================================== */
+
+.welcome-section {
+  margin-bottom: 40px;
+}
+
+.welcome-content {
+  text-align: left;
+}
+
+.greeting {
+  color: #ffffff;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.greeting i {
+  color: #f39c12;
+  font-size: 2rem;
+  animation: pulse 2s infinite;
+}
+
+.subtitle {
+  color: #b3b3b3;
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* ==============================================
+   ÁLBUMES - SECCIONES ESPECÍFICAS
+   ============================================== */
+
+/* ==============================================
+   ÁLBUMES SECTION
+   ============================================== */
+
+.albums-section {
+  margin-bottom: 50px;
+}
+
+.section-title {
+  color: #ffffff;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0 0 25px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-title i {
+  color: #1db954;
+  font-size: 1.5rem;
+}
+
+.albums-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.album-card {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 15px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.album-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(29, 185, 84, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.album-image {
+  position: relative;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 1;
+}
+
+.album-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.album-card:hover .album-image img {
+  transform: scale(1.05);
+}
+
+.play-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.album-card:hover .play-overlay {
+  opacity: 1;
+}
+
+.play-btn-large {
+  background: linear-gradient(135deg, #1db954, #1ed760);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(29, 185, 84, 0.4);
+}
+
+.play-btn-large:hover {
+  background: linear-gradient(135deg, #1ed760, #21e065);
+  transform: scale(1.1);
+}
+
+.album-info {
+  text-align: left;
+}
+
+.album-title {
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.album-artist {
+  color: #b3b3b3;
+  font-size: 0.85rem;
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.album-tracks,
+.album-year {
+  color: #888;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* ==============================================
+   LOADING Y EMPTY STATES
+   ============================================== */
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.loading-spinner i {
+  font-size: 3rem;
+  color: #1db954;
+  margin-bottom: 20px;
+}
+
+.loading-container p {
+  color: #b3b3b3;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.empty-icon i {
+  font-size: 4rem;
+  color: #555;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.empty-state h3 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin: 0 0 10px 0;
+}
+
+.empty-state p {
+  color: #b3b3b3;
+  font-size: 1rem;
+  margin: 0 0 25px 0;
+}
+
+.retry-btn {
+  background: linear-gradient(135deg, #1db954, #1ed760);
+  border: none;
+  border-radius: 25px;
+  padding: 12px 24px;
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.retry-btn:hover {
+  background: linear-gradient(135deg, #1ed760, #21e065);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(29, 185, 84, 0.3);
+}
+
+
+
+/* ==============================================
+   ANIMACIONES
+   ============================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* ==============================================
+   RESPONSIVE DESIGN
+   ============================================== */
+
+@media (max-width: 768px) {
+  .home-container {
+    padding: 15px;
+  }
+  
+  .greeting {
+    font-size: 2rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .categories-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .category-card {
+    padding: 20px;
+    min-height: 100px;
+  }
+  
+  .playlists-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .categories-grid {
+    gap: 10px;
+  }
+  
+  .playlists-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .playlist-image img {
+    height: 150px;
+  }
+}

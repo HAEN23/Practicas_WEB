@@ -1,0 +1,60 @@
+<div class="player-container">
+  <div class="player-main">
+    <!-- Información de la canción actual -->
+    <div class="current-song-info" *ngIf="currentSong() as song">
+      <div class="album-cover">
+        <img [src]="song.caratula" [alt]="song.song_name" />
+      </div>
+      <div class="song-details">
+        <h2 class="song-title">{{ song.song_name }}</h2>
+        <p class="artist-name">{{ song.artist_name }}</p>
+      </div>
+    </div>
+
+    <!-- Controles del reproductor -->
+    <div class="player-controls">
+      <button 
+        class="control-btn prev-btn" 
+        (click)="previousSong()"
+        title="Canción anterior">
+        <i class="fa-solid fa-backward-step"></i>
+      </button>
+      
+      <button 
+        class="control-btn play-pause-btn" 
+        (click)="playPause()"
+        [title]="isPlaying() ? 'Pausar' : 'Reproducir'">
+        <i class="fa-solid" [class.fa-play]="!isPlaying()" [class.fa-pause]="isPlaying()"></i>
+      </button>
+      
+      <button 
+        class="control-btn next-btn" 
+        (click)="nextSong()"
+        title="Siguiente canción">
+        <i class="fa-solid fa-forward-step"></i>
+      </button>
+    </div>
+
+    <!-- Información de la playlist -->
+    <div class="playlist-info" *ngIf="playlist().length > 0">
+      <h3>Playlist Actual</h3>
+      <p>{{ playlist().length }} canciones disponibles</p>
+      
+      <div class="playlist-preview">
+        <div 
+          class="song-item" 
+          *ngFor="let song of playlist(); let i = index"
+          [class.current]="i === currentIndex()"
+          (click)="loadSong(song, true)">
+          <img [src]="song.caratula" [alt]="song.song_name" class="mini-cover" />
+          <div class="mini-song-info">
+            <span class="mini-title">{{ song.song_name }}</span>
+            <span class="mini-artist">{{ song.artist_name }}</span>
+          </div>
+          <i class="fa-solid fa-play mini-play-icon" *ngIf="i !== currentIndex()"></i>
+          <i class="fa-solid fa-volume-high mini-playing-icon" *ngIf="i === currentIndex() && isPlaying()"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

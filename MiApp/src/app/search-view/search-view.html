@@ -1,0 +1,112 @@
+<div class="search-view-container">
+  <!-- Header de búsqueda -->
+  <div class="search-header">
+    <div class="search-header-content">
+      <button class="back-btn" (click)="onClearSearch()" title="Volver">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Volver</span>
+      </button>
+      
+      <div class="search-info">
+        <h2>
+          <i class="fa-solid fa-magnifying-glass"></i>
+          Resultados de búsqueda
+        </h2>
+        <p>{{ searchResults.length }} canciones encontradas</p>
+      </div>
+      
+      <button class="clear-all-btn" (click)="onClearSearch()" title="Limpiar búsqueda">
+        <i class="fa-solid fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Lista de resultados -->
+  <div class="search-results-container">
+    <div *ngIf="searchResults.length === 0" class="no-results">
+      <div class="no-results-content">
+        <i class="fa-solid fa-music"></i>
+        <h3>No hay resultados</h3>
+        <p>Prueba con diferentes términos de búsqueda</p>
+      </div>
+    </div>
+
+    <div *ngIf="searchResults.length > 0" class="results-list">
+      <!-- Lista estilo Spotify -->
+      <div class="results-table-header">
+        <div class="header-index">#</div>
+        <div class="header-title">Título</div>
+        <div class="header-album">Álbum</div>
+        <div class="header-duration">Duración</div>
+        <div class="header-actions">Acciones</div>
+      </div>
+
+      <div 
+        class="result-row" 
+        *ngFor="let track of searchResults; let i = index"
+        [class.playing]="isCurrentTrackPlaying(track)">
+        
+        <!-- Número/Play button -->
+        <div class="result-index">
+          <span class="track-number" *ngIf="!isCurrentTrackPlaying(track)">{{ i + 1 }}</span>
+          <button 
+            *ngIf="isCurrentTrackPlaying(track) && isPlaying"
+            class="playing-indicator"
+            (click)="onPlayTrack(track)">
+            <i class="fa-solid fa-pause"></i>
+          </button>
+          <button 
+            *ngIf="!isCurrentTrackPlaying(track)"
+            class="play-btn-small"
+            (click)="onPlayTrack(track)"
+            style="display: none;">
+            <i class="fa-solid fa-play"></i>
+          </button>
+        </div>
+
+        <!-- Información de la canción -->
+        <div class="result-track-info">
+          <div class="track-image">
+            <img 
+              [src]="track.album?.images?.[0]?.url || 'https://via.placeholder.com/40x40/1db954/ffffff?text=♪'" 
+              [alt]="track.name" />
+          </div>
+          <div class="track-details">
+            <span class="track-name">{{ track.name }}</span>
+            <span class="track-artist">{{ track.artists?.[0]?.name }}</span>
+          </div>
+        </div>
+
+        <!-- Álbum -->
+        <div class="result-album">
+          <span>{{ track.album?.name }}</span>
+        </div>
+
+        <!-- Duración -->
+        <div class="result-duration">
+          <span>{{ formatDuration(track.duration_ms) }}</span>
+        </div>
+
+        <!-- Acciones -->
+        <div class="result-actions">
+          <button 
+            class="action-btn like-btn" 
+            title="Me gusta">
+            <i class="fa-solid fa-heart"></i>
+          </button>
+          <button 
+            class="action-btn add-btn" 
+            (click)="onAddToPlaylist(track)"
+            title="Agregar a playlist">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+          <button 
+            class="action-btn more-btn" 
+            title="Más opciones">
+            <i class="fa-solid fa-ellipsis"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="search-section-full">
+  <!-- Solo la barra de búsqueda -->
+  <div class="search-header">
+    <app-search-bar (searchResults)="onSearchResults($event)"></app-search-bar>
+  </div>
+
+  <!-- Estado de carga (solo aparece cuando está buscando) -->
+  <div class="loading-container" *ngIf="isLoading">
+    <div class="loading-spinner">
+      <i class="fa-solid fa-spinner fa-spin"></i>
+    </div>
+    <p class="loading-text">Buscando...</p>
+  </div>
+
+  <!-- Resultados (solo aparecen cuando hay resultados) -->
+  <div class="search-results-full" *ngIf="searchResults.length > 0 && !isLoading">
+    <div class="results-grid">
+      <div class="result-card" *ngFor="let track of searchResults; let i = index">
+        <div class="card-image">
+          <img [src]="track.album?.images?.[0]?.url || 'https://via.placeholder.com/300x300/1db954/ffffff?text=♪'" 
+               [alt]="track.name" 
+               class="track-cover" />
+          <div class="play-overlay">
+            <button class="play-btn-large" (click)="playTrack(track)" title="Reproducir">
+              <i class="fa-solid fa-play"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="card-content">
+          <h4 class="track-title">{{ track.name }}</h4>
+          <p class="track-artist">{{ track.artists?.[0]?.name }}</p>
+          <p class="track-album">{{ track.album?.name }}</p>
+          
+          <div class="card-actions">
+            <button class="action-btn add-btn" (click)="addToPlaylist(track)" title="Agregar a playlist">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+            <button class="action-btn like-btn" title="Me gusta">
+              <i class="fa-solid fa-heart"></i>
+            </button>
+            <button class="action-btn share-btn" title="Compartir">
+              <i class="fa-solid fa-share"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

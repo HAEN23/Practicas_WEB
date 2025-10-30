@@ -87,7 +87,7 @@ export class MusicPlayerService {
           
           // Mapear TODAS las canciones de Spotify + combinar con locales
           if (response.tracks && response.tracks.items && response.tracks.items.length > 0) {
-            console.log(`📋 Procesando ${response.tracks.items.length} tracks de Spotify...`);
+            console.log(` Procesando ${response.tracks.items.length} tracks de Spotify...`);
             
             // Separar canciones CON preview y SIN preview
             const songsWithPreview: Song[] = [];
@@ -99,8 +99,8 @@ export class MusicPlayerService {
                 const track = item.track;
                 const hasPreview = track.preview_url && track.preview_url.trim() !== '';
                 
-                console.log(`🎵 Track ${index + 1}: ${track.name} - Preview: ${hasPreview ? 'SÍ ✅' : 'NO ❌'}`);
-                if (hasPreview) console.log(`   🔗 Preview URL: ${track.preview_url}`);
+                console.log(` Track ${index + 1}: ${track.name} - Preview: ${hasPreview ? 'SÍ ' : 'NO '}`);
+                if (hasPreview) console.log(`    Preview URL: ${track.preview_url}`);
                 
                 const song: Song = {
                   song_name: track.name,
@@ -118,32 +118,32 @@ export class MusicPlayerService {
                 }
               });
             
-            console.log(`🎵 Canciones CON preview: ${songsWithPreview.length}`);
-            console.log(`❌ Canciones SIN preview: ${songsWithoutPreview.length}`);
+            console.log(` Canciones CON preview: ${songsWithPreview.length}`);
+            console.log(`Canciones SIN preview: ${songsWithoutPreview.length}`);
             
             // Usar solo canciones con preview + algunas locales como backup
             const finalPlaylist = [...songsWithPreview, ...this.defaultSongs.slice(0, 3)];
             
-            console.log(`✅ Total de canciones: ${finalPlaylist.length}`);
-            console.log(`🎵 Spotify (con preview): ${songsWithPreview.length}, Locales backup: ${Math.min(3, this.defaultSongs.length)}`);
+            console.log(` Total de canciones: ${finalPlaylist.length}`);
+            console.log(` Spotify (con preview): ${songsWithPreview.length}, Locales backup: ${Math.min(3, this.defaultSongs.length)}`);
             
             if (finalPlaylist.length > 0) {
               // Usar la playlist final
               this._playlist.set(finalPlaylist);
               this.loadSong(finalPlaylist[0]);
               this._currentIndex.set(0);
-              console.log('🎵 Playlist con previews de Spotify cargada y lista para reproducir');
+              console.log(' Playlist con previews de Spotify cargada y lista para reproducir');
             } else {
-              console.warn('⚠️ No se encontraron previews, usando solo playlist local');
+              console.warn(' No se encontraron previews, usando solo playlist local');
               this.loadDefaultPlaylist();
             }
           } else {
-            console.warn('⚠️ No se encontraron tracks, usando playlist local');
+            console.warn(' No se encontraron tracks, usando playlist local');
             this.loadDefaultPlaylist();
           }
         },
         error: (error) => {
-          console.error('❌ Error cargando playlist de Spotify:', error);
+          console.error(' Error cargando playlist de Spotify:', error);
           this.loadDefaultPlaylist();
         }
       });
@@ -186,7 +186,7 @@ export class MusicPlayerService {
       console.log('🎵 Canción terminada - Pasando a la siguiente automáticamente');
       // Pequeño delay para evitar problemas y asegurar que termine limpiamente
       setTimeout(() => {
-        console.log('⏭️ Ejecutando nextSong()...');
+        console.log('⏭ Ejecutando nextSong()...');
         this.nextSong();
       }, 100);
     });
@@ -231,11 +231,11 @@ export class MusicPlayerService {
     const isLocalFile = song.song_url.startsWith('media/');
     
     if (isSpotifyPreview) {
-      console.log('🎵 TIPO: Preview de Spotify (30 segundos)');
+      console.log(' TIPO: Preview de Spotify (30 segundos)');
     } else if (isLocalFile) {
-      console.log('📁 TIPO: Archivo local');
+      console.log(' TIPO: Archivo local');
     } else {
-      console.log('❓ TIPO: Desconocido');
+      console.log(' TIPO: Desconocido');
     }
     
     console.log('Auto reproducir:', autoPlay);
@@ -384,7 +384,7 @@ export class MusicPlayerService {
   
   // Método de prueba para diagnosticar problemas
   testAudio() {
-    console.log('🔍 DIAGNÓSTICO DE AUDIO');
+    console.log(' DIAGNÓSTICO DE AUDIO');
     console.log('Estado del audio:', {
       src: this._audio.src,
       paused: this._audio.paused,
@@ -404,11 +404,11 @@ export class MusicPlayerService {
     this._audio.load();
     
     this._audio.addEventListener('canplay', () => {
-      console.log('✅ Audio de prueba listo');
+      console.log(' Audio de prueba listo');
       this._audio.play().then(() => {
-        console.log('✅ Audio de prueba reproduciendo');
+        console.log(' Audio de prueba reproduciendo');
       }).catch(error => {
-        console.log('❌ Error reproduciendo audio de prueba:', error);
+        console.log(' Error reproduciendo audio de prueba:', error);
       });
     }, { once: true });
   }

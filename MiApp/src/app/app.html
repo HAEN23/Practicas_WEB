@@ -1,50 +1,59 @@
 <div class="music-app">
-  <header class="app-header">
-    <h1>{{ title }}</h1>
-    <!-- Botones de Spotify -->
-    <div style="display: flex; gap: 10px; margin-left: 20px; flex-wrap: wrap;">
-      <button 
-        (click)="testSpotifyLogin()" 
-        style="padding: 10px 20px; background: #1DB954; color: white; border: none; border-radius: 5px; cursor: pointer;">
-        🎶 Login Spotify
-      </button>
-      <button 
-        (click)="useSpotifyCode()" 
-        style="padding: 10px 20px; background: #FF6B35; color: white; border: none; border-radius: 5px; cursor: pointer;">
-        🎫 Usar Código
-      </button>
-      <button 
-        (click)="reloadSpotifyPlaylist()" 
-        style="padding: 10px 20px; background: #1ED760; color: white; border: none; border-radius: 5px; cursor: pointer;">
-        🔄 Cargar Playlist
-      </button>
-      <button 
-        (click)="testNextSong()" 
-        style="padding: 10px 20px; background: #9146FF; color: white; border: none; border-radius: 5px; cursor: pointer;">
-        ⏭️ Test Next
-      </button>
-      <button 
-        (click)="testPreviousSong()" 
-        style="padding: 10px 20px; background: #9146FF; color: white; border: none; border-radius: 5px; cursor: pointer;">
-        ⏮️ Test Prev
-      </button>
-      <button 
-        (click)="showCurrentPlaylist()" 
-        style="padding: 10px 20px; background: #333; color: white; border: none; border-radius: 5px; cursor: pointer;">
-        📋 Ver Playlist
-      </button>
-    </div>
-  </header>
+  
+  <!-- VISTA DE BÚSQUEDA (Pantalla completa diferente) -->
+  <div *ngIf="showSearchBar" class="search-view">
+    <app-search (closeSearch)="hideSearchBar()"></app-search>
+  </div>
 
-  <main class="app-main">
-    <!-- Información y selección de canciones -->
-    <section class="song-info-section">
-      <app-info-song></app-info-song>
-    </section>
+  <!-- VISTA PRINCIPAL CON ROUTING -->
+  <div *ngIf="!showSearchBar" class="main-view">
+    <header class="app-header">
+      <div class="header-content">
+        <!-- Navegación izquierda -->
+        <div class="nav-section">
+          <h1>{{ title }}</h1>
+          <nav class="main-nav">
+            <a 
+              routerLink="/home" 
+              class="nav-btn home-btn" 
+              routerLinkActive="active"
+              (mouseenter)="onNavHover('home')"
+              title="Descubre nueva música">
+              <i class="fa-solid fa-home"></i>
+              <span>Inicio</span>
+            </a>
+            <a 
+              routerLink="/playlist" 
+              class="nav-btn playlist-btn" 
+              routerLinkActive="active"
+              (mouseenter)="onNavHover('playlist')"
+              title="Tu colección personal">
+              <i class="fa-solid fa-list-music"></i>
+              <span>Mi Playlist</span>
+            </a>
+            <a 
+              routerLink="/search" 
+              class="nav-btn search-btn" 
+              routerLinkActive="active"
+              (mouseenter)="onNavHover('search')"
+              title="Buscar música">
+              <i class="fa-solid fa-search"></i>
+              <span>Buscar</span>
+            </a>
+          </nav>
+        </div>
+        
+        <!-- Barra de búsqueda derecha -->
+        <div class="header-search">
+          <app-search-bar (searchResults)="onSearchResults($event)"></app-search-bar>
+        </div>
+      </div>
+    </header>
 
-    <!-- Controles de reproducción -->
-    <section class="media-controls-section">
-      <app-media-control></app-media-control>
-    </section>
-  </main>
+    <!-- Contenido principal con Router Outlet -->
+    <main class="app-main">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+  
 </div>

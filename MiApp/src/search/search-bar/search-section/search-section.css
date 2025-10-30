@@ -1,0 +1,416 @@
+
+/* ==============================================
+   HEADER DE BÚSQUEDA
+   ============================================== */
+
+.search-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.search-title {
+  color: #ffffff;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.search-title i {
+  color: #1db954;
+  margin-right: 15px;
+  animation: pulse 2s infinite;
+}
+
+/* ==============================================
+   ESTADO DE CARGA
+   ============================================== */
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  color: #ffffff;
+}
+
+.loading-spinner {
+  font-size: 3rem;
+  color: #1db954;
+  margin-bottom: 20px;
+}
+
+.loading-spinner i {
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  font-size: 1.2rem;
+  color: #b3b3b3;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* ==============================================
+   RESULTADOS DE BÚSQUEDA
+   ============================================== */
+
+.search-results-full {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.results-header {
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgba(29, 185, 84, 0.3);
+}
+
+.results-header h3 {
+  color: #ffffff;
+  font-size: 1.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.results-header i {
+  color: #1db954;
+}
+
+/* ==============================================
+   GRID DE RESULTADOS
+   ============================================== */
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 20px 0;
+}
+
+.result-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 20px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: 1px solid rgba(29, 185, 84, 0.1);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  animation: slideInUp 0.6s ease-out;
+}
+
+.result-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(29, 185, 84, 0.1), transparent);
+  transition: left 0.6s;
+}
+
+.result-card:hover::before {
+  left: 100%;
+}
+
+.result-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(29, 185, 84, 0.2);
+  border-color: rgba(29, 185, 84, 0.4);
+}
+
+/* ==============================================
+   IMAGEN DE LA TARJETA
+   ============================================== */
+
+.card-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.track-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.play-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.result-card:hover .play-overlay {
+  opacity: 1;
+}
+
+.result-card:hover .track-cover {
+  transform: scale(1.1);
+}
+
+.play-btn-large {
+  background: #1db954;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(29, 185, 84, 0.4);
+}
+
+.play-btn-large:hover {
+  background: #1ed760;
+  transform: scale(1.1);
+  box-shadow: 0 12px 35px rgba(29, 185, 84, 0.6);
+}
+
+/* ==============================================
+   CONTENIDO DE LA TARJETA
+   ============================================== */
+
+.card-content {
+  color: #ffffff;
+}
+
+.track-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #ffffff;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.track-artist {
+  font-size: 0.9rem;
+  color: #b3b3b3;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.track-album {
+  font-size: 0.8rem;
+  color: #888888;
+  margin-bottom: 15px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ==============================================
+   ACCIONES DE LA TARJETA
+   ============================================== */
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.action-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  color: #b3b3b3;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.add-btn:hover {
+  background: #1db954;
+  border-color: #1db954;
+}
+
+.like-btn:hover {
+  background: #e22134;
+  border-color: #e22134;
+}
+
+.share-btn:hover {
+  background: #1d9bf0;
+  border-color: #1d9bf0;
+}
+
+/* ==============================================
+   PANTALLA DE BIENVENIDA
+   ============================================== */
+
+
+
+/* ==============================================
+   ANIMACIONES
+   ============================================== */
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==============================================
+   RESPONSIVE DESIGN
+   ============================================== */
+
+@media (max-width: 768px) {
+  .search-section-full {
+    padding: 15px;
+  }
+
+  .search-title {
+    font-size: 2rem;
+  }
+
+  .results-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .result-card {
+    padding: 15px;
+  }
+
+
+}
+
+@media (max-width: 480px) {
+  .search-title {
+    font-size: 1.6rem;
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .loading-spinner {
+    font-size: 2rem;
+  }
+
+  .play-btn-large {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+}
+
+/* ==============================================
+   SCROLL PERSONALIZADO
+   ============================================== */
+
+.search-section-full::-webkit-scrollbar {
+  width: 8px;
+}
+
+.search-section-full::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.search-section-full::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #1db954, #1ed760);
+  border-radius: 4px;
+}
+
+.search-section-full::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #1ed760, #21e065);
+}

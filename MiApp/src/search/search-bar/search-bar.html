@@ -1,0 +1,17 @@
+<div class="search-container" #searchContainer>
+    <input 
+        type="text" 
+        [(ngModel)]="searchQuery" 
+        id="search-input"
+        (keypress)="onKeyPress($event)"
+        (input)="onInput()"
+        placeholder="Buscar canciones, artistas..."
+        autocomplete="off"
+        spellcheck="false">
+    <span id="search-icon" (click)="doSearch()" [title]="isLoading ? 'Buscando...' : 'Buscar música'">
+        <i class="fa-solid" 
+           [class.fa-magnifying-glass]="!isLoading" 
+           [class.fa-spinner]="isLoading"
+           [class.fa-spin]="isLoading"></i>
+    </span>
+</div>

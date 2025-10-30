@@ -1,0 +1,59 @@
+
+<nav class="nav-bar">
+    <div class="nav-left-side">
+        <div class="nav-logo">
+            <i class="fa-brands fa-spotify"></i>
+            <span class="app-name">SoundShock</span>
+        </div>
+        
+        <div class="nav-links">
+            <a (click)="goHome()" class="nav-link" id="home-button">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+            <a (click)="goToPlaylist()" class="nav-link" id="playlist-button">
+                <i class="fa-solid fa-list-music"></i>
+                <span>Playlist</span>
+            </a>
+        </div>
+        
+        <div class="nav-search-bar">
+            <div class="search-container">
+                <input 
+                    [(ngModel)]="buscado" 
+                    type="text" 
+                    id="search-input"
+                    placeholder="Buscar canciones, artistas..."
+                    (keyup.enter)="onSearch()"
+                    [disabled]="isSearching">
+                <button 
+                    (click)="onSearch()" 
+                    id="search-button"
+                    [disabled]="isSearching || !buscado.trim()"
+                    [title]="isSearching ? 'Buscando...' : 'Buscar'">
+                    <i class="fa-solid fa-magnifying-glass" *ngIf="!isSearching"></i>
+                    <i class="fa-solid fa-spinner fa-spin" *ngIf="isSearching"></i>
+                </button>
+                <button 
+                    (click)="clearSearch()" 
+                    id="clear-button"
+                    *ngIf="buscado.trim()"
+                    title="Limpiar búsqueda">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="nav-right-side">
+        <button 
+            class="close-search-btn"
+            (click)="closeSearchBar()"
+            title="Cerrar búsqueda">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+</nav>
+
+<router-outlet></router-outlet>
+
